@@ -1,8 +1,6 @@
-# region imports
 from AlgorithmImports import *
 from collections import deque
 import numpy as np
-# endregion
 
 class CumulativeReturn(PythonIndicator):
     """
@@ -33,7 +31,6 @@ class CustomStandardDeviation(PythonIndicator):
 
 
 class UpgradedVioletCobra(QCAlgorithm):
-
     # Todo: Export this function to a library
     def getIndicatorType(self, indicator: str):
         switcher = {
@@ -51,16 +48,11 @@ class UpgradedVioletCobra(QCAlgorithm):
         self.equities = tuple()
         self.indicators = dict()
 
-        # self.AddCrypto("BTCUSD", Resolution.Daily).Symbol
-
-
-
         self.all_indicators = {
-            'SMA': {'SPY': (200,), 'BITO': (15,200), 'BTCUSD': (20,200)},
+            'SMA': {'SPY': (200,),'BTCUSD': (20,200)},
             'RSI': 
-                {'TQQQ': (10,5), 'SPXL': (10,), 'SQQQ': (5,10), 
-                'SOXS': (5,), 'TLT': (5,10), 'SOXL': (5,), 'SPY': (10,), 
-                'UVXY': (10,), 'BTCUSD': (10,59,), 'QQQ': (10,), 'BITO':(10,59,), 'BITI': (10,)},
+                { 'SPY': (10,), 
+                'BTCUSD': (10,59,)},
             'CR': {'QQQ': (5,), 'TQQQ': (1,)},
             'STD': {'TQQQ': (10,)},
         }
@@ -110,8 +102,7 @@ class UpgradedVioletCobra(QCAlgorithm):
                     else:
                         selected_indicator.Update(self.Securities[equity].Close)
 
-
-
+                        
     def sortEquitiesByIndicator(self, equities: list, indicator: str, period: int, reverse=False):
         def getCurrentIndicatorValue(equity: str):
             return self.indicators[equity][indicator][f'Period-{period}'].Current.Value
@@ -123,10 +114,9 @@ class UpgradedVioletCobra(QCAlgorithm):
         else:
             self.SetHoldings(asset, 1, True)
 
-
+    # Algorithm Logic
     def FunctionBeforeMarketClose(self):
         self.warmUpIndicators()
-        
 
         if self.Securities['SPY'].Close > self.indicators['SPY']['SMA']['Period-200'].Current.Value:
             if self.Securities['BTCUSD'].Close > self.indicators['BTCUSD']['SMA']['Period-20'].Current.Value:
