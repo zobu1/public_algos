@@ -1,3 +1,2 @@
 # public_algos
-This is a collection of basic trading algorithms that I have released publically. Make sure to do your own research before deciding to invest in any of these algoirthms.
-All of these algorithms can be live traded using the lean engine without modifications. However, appropriate brokers and data will be necessary.
+This is a database where you will find trading models I have released publically. Some of these models will be made in QuantConnect, where you can readily backtest them and live trade them if you wish. Others may be programmed in an alternative format, where modifications will have to be made for live trading.
