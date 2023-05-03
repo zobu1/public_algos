@@ -54,9 +54,9 @@ class UpgradedVioletCobra(QCAlgorithm):
         self.all_indicators = {
             'SMA': {'SPY': (200,), 'QLD': (20,)},
             'RSI': 
-                {'QLD': (10,5), 'SPXL': (10,), 'PSQ': (5,10), 
-                'SOXS': (5,), 'TLT': (5,), 'SOXL': (5,), 'SPY': (10,), 
-                'UVXY': (10,), 'QQQ': (10,)},
+                {'QLD': (10,5), 'PSQ': (5,10), 
+                'TLT': (5,),'SPY': (10,), 
+                'QQQ': (10,)},
             'CR': {'QQQ': (5,), 'TQQQ': (1,)},
             'STD': {'QQQ': (10,)},
         }
