@@ -57,7 +57,7 @@ class UpgradedVioletCobra(QCAlgorithm):
                 {'QLD': (10,5), 'PSQ': (5,10), 
                 'TLT': (5,),'SPY': (10,), 
                 'QQQ': (10,)},
-            'CR': {'QQQ': (5,), 'TQQQ': (1,)},
+            'CR': {'QQQ': (5,)},
             'STD': {'QQQ': (10,)},
         }
 
