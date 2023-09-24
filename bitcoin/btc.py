@@ -107,11 +107,6 @@ class UpgradedVioletCobra(QCAlgorithm):
             return self.indicators[equity][indicator][f'Period-{period}'].Current.Value
         return sorted(equities, key=getCurrentIndicatorValue, reverse=reverse)
 
-    def TLT(self , asset):
-        if asset == 'TLT':
-            self.Liquidate()
-        else:
-            self.SetHoldings(asset, 1, True)
 
     # Algorithm Logic
     def FunctionBeforeMarketClose(self):
