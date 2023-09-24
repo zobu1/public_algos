@@ -49,12 +49,11 @@ class UpgradedVioletCobra(QCAlgorithm):
         self.indicators = dict()
 
         self.all_indicators = {
-            'SMA': {'SPY': (200,),'BTCUSD': (20,200)},
+            'SMA': {'BTCUSD': (20,200)},
             'RSI': 
                 { 'SPY': (10,), 
                 'BTCUSD': (10,59,)},
-            'CR': {'QQQ': (5,), 'TQQQ': (1,)},
-            'STD': {'TQQQ': (10,)},
+  
         }
 
         # Instantiate indicators
