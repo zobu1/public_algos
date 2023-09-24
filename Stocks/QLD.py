@@ -52,13 +52,9 @@ class UpgradedVioletCobra(QCAlgorithm):
         self.indicators = dict()
 
         self.all_indicators = {
-            'SMA': {'SPY': (200,), 'QLD': (20,)},
-            'RSI': 
-                {'QLD': (10,5), 'PSQ': (5,10), 
-                'TLT': (5,),'SPY': (10,), 
-                'QQQ': (10,)},
+            'SMA': {'SPY': (200,), 'SPY': (50,)},
             'CR': {'QQQ': (5,)},
-            'STD': {'QQQ': (10,)},
+            'STD': {'SPY': (10,)},
         }
 
         # Instantiate indicators
@@ -118,32 +114,13 @@ class UpgradedVioletCobra(QCAlgorithm):
     def FunctionBeforeMarketClose(self):
         self.warmUpIndicators()
         # Algorithm logic
-        if self.Securities['SPY'].Close > self.indicators['SPY']['SMA']['Period-200'].Current.Value:
-            if self.indicators['QQQ']['RSI']['Period-10'].Current.Value > 80: # mean reversion
-                self.SetHoldings('PSQ', 1, True)
-            else:
-                if self.indicators['SPY']['RSI']['Period-10'].Current.Value > 80: # mean reversion
-                    self.SetHoldings('SH', 1, True)
-                else:
-                    if self.indicators['QQQ']['STD']['Period-10'].Current.Value > 2: # high volatility
+        self.Securities['SPY'].Close 
+        if self.indicators['SPY']['SMA']['Period-50'].Current.Value > self.indicators['SPY']['SMA']['Period-200'].Current.Value:
+            if self.indicators['SPY']['STD']['Period-10'].Current.Value > 2: # high volatility
                         self.Liquidate()
-                    else:
-                        self.SetHoldings('QLD', 1, True) # bull market
-                        
-        else:
-            if self.indicators['QQQ']['RSI']['Period-10'].Current.Value < 30: # mean reversion 
-                self.SetHoldings('QLD', 1, True)
             else:
-                if self.indicators['SPY']['RSI']['Period-10'].Current.Value < 30: # mean reversion
-                    self.SetHoldings('QLD', 1, True)
-                else:
-                    if self.Securities['QLD'].Close > self.indicators['QLD']['SMA']['Period-20'].Current.Value: # bullish momentum
-                         if self.indicators['PSQ']['RSI']['Period-10'].Current.Value < 31: # mean reversion
-                            asset = self.sortEquitiesByIndicator(['PSQ',  'TLT'], 'RSI', 5, reverse=True)[-1]
-                            self.TLT(asset)
-                         else:
-                            self.SetHoldings('QLD' , 1, True)
-                    else:
-                        asset = self.sortEquitiesByIndicator(['PSQ', 'TLT'], 'RSI', 5)[-1] # bearish momentum, compare with treasuries for strength
-                        self.TLT(asset)
-                        
+                asset = self.sortEquitiesByIndicator(['QQQ',  'SOXX' , 'SPY' , 'VTI'], 'CR', 21, reverse=True)[-1]  
+        else:
+            self.Liquidate()
+
+        
